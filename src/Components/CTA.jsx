@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiCalendar } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import img from './CTA img.jpg';
 
 const CTASection = () => {
   const whatsappNumber = "1234567890";
@@ -9,8 +10,8 @@ const CTASection = () => {
 
   return (
     <>
-    
-      <section className="hidden md:block  py-24 px-6 text-center">
+     
+      <section className="hidden md:block py-24 px-6 text-center">
         <h2 className="text-7xl font-extrabold tracking-wide mb-8 ">
           DESIGN <span className="text-[#FE8535] font-extrabold text-6xl text-center ">✦</span> CAPTURE <span className="text-[#FE8535] text-6xl text-center ">✦</span> CREATE
         </h2>
@@ -21,7 +22,19 @@ const CTASection = () => {
           <div className="h-0.5 w-131 bg-black"></div>
         </div>
 
-        <div className="max-w-6xl mx-auto bg-gray-900 rounded-3xl h-[260px] mb-8" />
+        {/* IMAGE CONTAINER - DESKTOP */}
+        <div className="max-w-6xl mx-auto rounded-3xl h-[400px] mb-8 overflow-hidden relative group">
+          <motion.img 
+            initial={{ scale: 1.1 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 1.5 }}
+            src={img} 
+            className="w-full h-full object-cover"
+            alt="CTA Background"
+          />
+          {/* Subtle dark overlay to match the brand feel */}
+          <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+        </div>
 
         <p className="max-w-2xl mx-auto text-[#000000] mb-8">
           Finding the right team for your business can be overwhelming.
@@ -40,11 +53,10 @@ const CTASection = () => {
       </section>
 
       {/* ============================================================
-          MOBILE/TABLET VERSION (AWWWWARDS CUSTOM HANDCRAFTED)
+          MOBILE/TABLET VERSION
           ============================================================ */}
       <section className="block md:hidden bg-[#FAF7F2] py-16 px-4 overflow-hidden">
         <div className="relative">
-          {/* Awwwards Kinetic Ticker - Headlines move slightly on scroll */}
           <motion.div 
             initial={{ x: -100 }}
             whileInView={{ x: 0 }}
@@ -62,31 +74,33 @@ const CTASection = () => {
             </h2>
           </motion.div>
 
-          {/* Minimalist divider for mobile */}
           <div className="w-full flex items-center gap-2 mb-10 opacity-30">
              <div className="h-[1px] flex-grow bg-black" />
              <span className="text-xs">✦</span>
              <div className="h-[1px] w-12 bg-black" />
           </div>
 
-          {/* Immersive Video/Image Anchor */}
+          {/* IMAGE CONTAINER - MOBILE */}
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="w-full bg-gray-900 rounded-[2rem] aspect-video mb-10 shadow-2xl relative overflow-hidden"
+            className="w-full rounded-[1rem] aspect-video mb-10 shadow-2xl relative overflow-hidden"
           >
-            {/* Soft Grain Overlay */}
+            {/* Background Image */}
+            <img 
+              src={img} 
+              className="absolute inset-0  w-full h-full object-cover" 
+              alt="Team Uraan CTA"
+            />
+            
+            {/* Overlay Gradient for readability */}
+            <div className="absolute inset-0 bg-black/20" />
+
+            {/* Your Original Soft Grain Overlay */}
             <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-            <div className="absolute inset-0 flex items-center justify-center">
-               <motion.div 
-                 animate={{ scale: [1, 1.1, 1] }} 
-                 transition={{ repeat: Infinity, duration: 4 }}
-                 className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center backdrop-blur-md"
-               >
-                 <div className="w-2 h-2 bg-[#FE8535] rounded-full" />
-               </motion.div>
-            </div>
+            
+            
           </motion.div>
 
           <motion.p 
@@ -97,7 +111,6 @@ const CTASection = () => {
             Finding the right team shouldn't be overwhelming. Let <span className="font-bold">Team Uraan</span> take the guesswork out.
           </motion.p>
 
-          {/* Fixed-Position / High-Contrast Action Buttons */}
           <div className="flex flex-col gap-4 px-2">
             <motion.a 
               whileTap={{ scale: 0.95 }}

@@ -1,30 +1,34 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
-
+import img1 from './p2.jpg'
+import img2 from './p1.jpg'
+import img3 from './p4.jpg'
+import img4 from './p3.jpg'
 const services = [
   {
     id: 1,
     title: "Content Creation",
     desc: "From eye catching visuals to compelling captions, we turn your social media platforms into engagement engines that attract, convert, and retain customers. Our strategies go beyond likes and comments, focusing on lead generation, conversions, and sustainable growth.",
-    image: "https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&q=80&w=800", 
+    image: img1
+  
   },
   {
     id: 2,
     title: "Digital Marketing",
     desc: "We design performance-driven digital marketing campaigns using SEO, paid ads, and analytics to increase visibility, traffic, and measurable ROI.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    image: img2
   },
   {
     id: 3,
     title: "Video & Photography",
     desc: "High-quality videos and photography that capture attention, tell stories, and elevate your brand across all platforms.",
-    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=800",
+    image: img3
   },
   {
     id: 4,
     title: "Restaurant POS",
     desc: "Smart POS solutions that streamline restaurant operations, manage orders efficiently, and enhance customer experience.",
-    image: "https://images.unsplash.com/photo-1556742049-04ff4361c26a?auto=format&fit=crop&q=80&w=800",
+    image: img4
   },
 ];
 

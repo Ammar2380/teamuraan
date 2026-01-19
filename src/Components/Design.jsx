@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import star from './Star 2.png'
-
+import img from "./p5.jpg"
 const steps = [
   {
     title: "Discovery",
@@ -16,7 +16,7 @@ const steps = [
   {
     title: "Design",
     desc: "We work closely with our clients to refine visuals and user experience.",
-    image: "https://images.unsplash.com/photo-1586717791821-3f44a563dc4c?q=80&w=2070&auto=format&fit=crop",
+    image: img
   },
   {
     title: "Development",
