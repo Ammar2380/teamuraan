@@ -101,8 +101,8 @@ const Process = () => {
   return (
     <section className="relative bg-[#0A0A0A] text-white py-16 md:py-25 overflow-hidden"> {/* Reduced py-24/33 to py-16/20 */}
       
-      <div className="absolute top-0 w-full h-8 bg-white origin-bottom-left" /> {/* Reduced h-12 to h-8 */}
-      <div className="absolute top-8 left-0 w-full h-12 bg-[#FE8535] -skew-y-1 origin-top-left z-10 flex items-center overflow-hidden shadow-2xl"> {/* Reduced height and top offset */}
+      <div className="absolute top-0 w-full h-8 md:hidden block bg-[#FAF6EC] origin-bottom-left" /> {/* Reduced h-12 to h-8 */}
+      <div className="absolute md:top-0 top-5 left-0 w-full h-12 bg-[#FE8535] md:-skew-y-0 skew-y-1 origin-top-left z-10 flex items-center overflow-hidden  shadow-2xl"> {/* Reduced height and top offset */}
         <motion.div 
           animate={{ x: [0, -1000] }}
           transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
@@ -172,7 +172,7 @@ const Process = () => {
         />
       </div>
 
-      <div className="absolute bottom-8 left-0 w-full h-12 bg-[#FE8535] -skew-y-1 origin-bottom-right z-10 flex justify-center items-center overflow-hidden shadow-2xl">
+      <div className="absolute bottom-8 left-0 w-full h-12 bg-[#FE8535] -skew-y-1 origin-bottom-right z-10 flex justify-center items-center overflow-hidden ">
         <motion.div 
           animate={{ x: [-1000, 0] }}
           transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
@@ -185,7 +185,7 @@ const Process = () => {
           ))}
         </motion.div>
       </div>
-      <div className="absolute bottom-0 w-full h-8 bg-white origin-bottom-left" />
+      <div className="absolute bottom-0 w-full h-8 bg-[#ffffff] origin-bottom-left" />
     </section>
   );
 };

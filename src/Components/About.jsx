@@ -29,7 +29,7 @@ export default function About() {
         <motion.img 
           style={{ rotate: rotateStar }}
           src={star} 
-          className='h-16 md:h-24 z-30   md:-left-3 top-[30%] md:top-[50%] absolute pointer-events-none opacity-50 md:opacity-100' 
+          className='h-16 md:h-24 z-30    top-[30%] md:top-[50%] absolute pointer-events-none opacity-50 md:opacity-100' 
           alt="star decoration" 
         />
 
@@ -103,11 +103,11 @@ export default function About() {
                 transition: { type: "spring", stiffness: 300 }
             }}
             /* Adjusted mobile height for better UX (h-[450px]) */
-            className="bg-gray-200 rounded-3xl h-[450px] md:h-[600px] w-full shadow-2xl overflow-hidden group relative cursor-pointer"
+            className="bg-gray-200 rounded-3xl h-[450px] md:h-[600px] w-full  overflow-hidden group relative cursor-pointer"
           >
             <div className="absolute inset-0 bg-[#FE8535]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
-            {/* Mobile-only "Scroll Down" hint for Awwwards feel */}
+
             <div className="absolute bottom-6 left-6 md:hidden">
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Our Essence ✦</p>
             </div>

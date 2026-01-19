@@ -43,7 +43,7 @@ const Hero = () => {
       />
 
       <div
-        className="mx-auto px-4 text-[#FAF6EC] w-full min-h-[150svh] md:min-h-200 flex flex-col justify-center items-center max-w-400 relative z-10"
+        className="mx-auto px-4 text-[#FAF6EC] w-full min-h-[150svh] md:min-h-240 flex flex-col justify-center items-center bottom-20 max-w-400 relative z-10"
         style={{
           backgroundImage: `url(${bg})`,
           backgroundSize: 'cover',
@@ -64,7 +64,7 @@ const Hero = () => {
         />
 
         {/* Hero Text: Back to your original style */}
-        <div className="flex flex-col justify-center items-center text-center px-4 md:px-9 space-y-6 md:space-y-2 relative z-20 mt-10 md:mt-0">
+        <div className="flex flex-col justify-center  items-center text-center px-4 md:px-9 space-y-6 md:space-y-2 md:relative md:bottom-14 relative z-20 mt-10 md:mt-0">
           <motion.p
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -89,7 +89,7 @@ const Hero = () => {
           </h1>
 
           {/* Mobile Static Headline */}
-          <h1 className="flex flex-col md:hidden m-0 font-black tracking-tighter text-[18vw] leading-[0.9] text-[#FAF6EC] uppercase text-center">
+          <h1 className="flex flex-col md:hidden  m-0 font-black tracking-tighter text-[18vw] leading-[0.9] text-[#FAF6EC] uppercase text-center">
             <span className="block">Team</span>
             <span className="block">Uraan</span>
           </h1>
@@ -111,7 +111,7 @@ const Hero = () => {
         </div>
 
         {/* --- DESKTOP DECK: Back to your original logic --- */}
-        <div className="hidden md:flex justify-center z-10 items-center gap-3 mt-10">
+        <div className="hidden md:flex justify-center z-10 items-center gap-3 md:relative md:top-0 mt-10">
           {images.map((img, idx) => (
             <motion.img 
                 key={idx}
@@ -122,8 +122,7 @@ const Hero = () => {
           ))}
         </div>
 
-        {/* --- NEW PROFESSIONAL MOBILE IMAGE SECTION --- */}
-        {/* We replace the "floating" images with a structured, horizontal peek-a-boo gallery */}
+        
         <div className="md:hidden w-full mt-12 px-4 z-30">
           <div className="flex gap-3 overflow-x-auto pb-8 no-scrollbar">
             {images.map((img, idx) => (

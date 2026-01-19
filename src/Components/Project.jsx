@@ -49,12 +49,24 @@ const ProjectsSection = () => {
   const [page, setPage] = useState(0);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeImage, setActiveImage] = useState(0);
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0, width: 0, height: 0 });
 
   const totalPages = Math.ceil(dummyProjects.length / 2);
   const visibleProjects = dummyProjects.slice(page * 2, page * 2 + 2);
 
   const nextProject = () => setPage((p) => (p + 1) % totalPages);
   const prevProject = () => setPage((p) => (p - 1 + totalPages) % totalPages);
+
+  // FIX: Scroll Lock and Reset Scroll on Open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden"; // Prevents background scrolling
+      window.scrollTo(0, window.scrollY); // Sticky fix for mobile safari
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => { document.body.style.overflow = "unset"; };
+  }, [selectedProject]);
 
   useEffect(() => {
     if (!selectedProject) return;
@@ -65,10 +77,10 @@ const ProjectsSection = () => {
   }, [selectedProject]);
 
   return (
-    <section className=" py-24 md:py-28 overflow-hidden relative" id="portfolio">
+    <section className="py-24 bg-[#ffffff] md:py-28 overflow-hidden relative" id="portfolio">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* HEADER - Editorial Layout */}
+        {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:px-20">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}>
             <span className="text-[#FE8535] font-bold tracking-[0.3em] text-[10px] uppercase block mb-2">Our Portfolio</span>
@@ -100,7 +112,19 @@ const ProjectsSection = () => {
                 {visibleProjects.map((project) => (
                   <motion.div
                     key={project.id}
-                    onClick={() => { setSelectedProject(project); setActiveImage(0); }}
+          onClick={(e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  setModalPosition({
+    top: rect.top + window.scrollY,
+    left: rect.left + window.scrollX,
+    width: rect.width,
+    height: rect.height,
+  });
+  setSelectedProject(project);
+  setActiveImage(0);
+}}
+
+
                     whileTap={{ scale: 0.96 }}
                     className="relative group h-[500px] md:h-[450px] rounded-[40px] overflow-hidden cursor-pointer shadow-2xl md:shadow-none"
                   >
@@ -129,57 +153,74 @@ const ProjectsSection = () => {
           <button onClick={nextProject} className="hidden md:flex w-16 h-16 rounded-full border border-black/10 items-center justify-center hover:bg-black hover:text-white transition-all">→</button>
         </div>
 
-      
         <div className="mt-20 text-center max-w-4xl mx-auto px-4">
            <div className="flex justify-center gap-6 md:hidden mb-8">
               <button onClick={prevProject} className="text-sm font-black tracking-widest uppercase pb-2 border-b-2 border-black">Prev</button>
               <button onClick={nextProject} className="text-sm font-black tracking-widest uppercase pb-2 border-b-2 border-black">Next</button>
            </div>
-
-           <div className="text-[10px] md:flex gap-10 md:h-1 justify-center items-center  md:text-sm text-[#888] tracking-tight  mb-6 font-medium">
-             <p>Content Creation</p>  <p>Digital Marketing</p>  <p>Video - Photography</p>
+           <div className="text-[10px] md:flex gap-10 md:h-1 justify-center items-center md:text-sm text-[#888] tracking-tight mb-6 font-medium">
+             <p>Content Creation</p> <p>Digital Marketing</p> <p>Video - Photography</p>
            </div>
-<div className="md:flex">
-
-           <h3 className="text-2xl md:text-2xl md:h-9 font-black text-[#111] leading-[1.2] mb-8 ">
-             The Stove Club, Naanstop, Chai Deewari, Jazzy Foods, Choolaah  <br /> Yum Yum Hotpot, Misty Coffee Cafe, Shawarma Kaizer & More
-           </h3>
+           <div className="md:flex">
+             <h3 className="text-2xl md:text-2xl md:h-9 font-black text-[#111] leading-[1.2] mb-8 ">
+               The Stove Club, Naanstop, Chai Deewari, Jazzy Foods, Choolaah <br /> Yum Yum Hotpot, Misty Coffee Cafe, Shawarma Kaizer & More
+             </h3>
              <motion.img src={arrow} className="h-8 md:h-15 inline" />
-</div>
-
+           </div>
            <p className="text-[#666] text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-             We start by getting to know our clients, their business goals, and their target audience. 
-             This involves conducting research, analyzing data, and discussing ideas with our clients to gain a deep understanding of their needs.
+             We start by getting to know our clients...
            </p>
         </div>
       </div>
 
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0, y: "100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "100%" }}
-            className="fixed inset-0 z-[200] bg-white flex flex-col"
-            style={{ height: '100dvh' }} 
-          >
-        
-            <div className="p-6 flex justify-between items-center border-b border-gray-100">
-               <div>
+     <AnimatePresence>
+  {selectedProject && (
+    <motion.div
+      initial={{
+        top: modalPosition.top,
+        left: modalPosition.left,
+        width: modalPosition.width,
+        height: modalPosition.height,
+        opacity: 0.7,
+        position: "fixed",
+        borderRadius: "40px",
+      }}
+      animate={{
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100dvh",
+        opacity: 1,
+        borderRadius: 0,
+      }}
+      exit={{
+        top: modalPosition.top,
+        left: modalPosition.left,
+        width: modalPosition.width,
+        height: modalPosition.height,
+        opacity: 0.7,
+        borderRadius: "40px",
+      }}
+      transition={{ type: "spring", damping: 25, stiffness: 200 }}
+      className="z-[200] bg-white flex flex-col"
+    >
+            {/* Modal Header */}
+            <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white">
+                <div>
                   <h4 className="text-black font-black uppercase text-lg">{selectedProject.title}</h4>
                   <p className="text-[10px] tracking-widest uppercase opacity-40">Slide {activeImage + 1} of {selectedProject.gallery.length}</p>
-               </div>
-               <button 
-                 onClick={() => setSelectedProject(null)} 
-                 className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-sm"
-               >
+                </div>
+                <button 
+                  onClick={() => setSelectedProject(null)} 
+                  className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-sm active:scale-90 transition-transform"
+                >
                 ✕
-               </button>
+                </button>
             </div>
 
-            
-            <div className="flex-1 relative flex items-center justify-center p-4 bg-[#f9f9f9]">
-                <div className="absolute top-0 left-0 right-0 flex gap-1 px-6 pt-4">
+            {/* Modal Gallery Content */}
+            <div className="flex-1 relative flex items-center justify-center p-4 bg-[rgb(249,249,249)] overflow-y-auto">
+                <div className="absolute top-0 left-0 right-0 flex gap-1 px-6 pt-4 z-10">
                    {selectedProject.gallery.map((_, i) => (
                      <div key={i} className="flex-1 h-1 bg-gray-200 rounded-full overflow-hidden">
                         {i === activeImage && (
@@ -197,7 +238,7 @@ const ProjectsSection = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
-                    className="max-h-[60vh] w-full object-contain rounded-xl"
+                    className="max-h-[70vh] w-full object-contain rounded-xl"
                   />
                 </AnimatePresence>
             </div>

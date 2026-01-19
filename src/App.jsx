@@ -42,16 +42,16 @@ const App = () => {
 
   <Navbar />
   <Hero/>
-  <div  className="mx-auto px-4 text-[#FAF6EC] w-full min-h-450 flex flex-col justify-center items-center  relative z-0"
+  <div  className="mx-auto px-4  text-[#FAF6EC] w-full min-h-450 flex flex-col justify-center items-center  relative z-0"
           style={{
             backgroundImage: `url(${background})`,
             backgroundSize: '100%',
             backgroundRepeat: 'no-repeat',
           }} >
     <div data-aos="fade-up"><About/></div>
-    <div data-aos="fade-up"><Services/></div>
+    <div data-aos="fade-up " ><Services/></div>
   </div>
-  <div data-aos="fade-up"><Design/></div>
+  <div data-aos="fade-up" className='z-50'><Design/></div>
   <div data-aos="fade-up"><ProjectsSection/></div>
   <div data-aos="fade-up"><Testimonials/></div>
   <div data-aos="fade-up"><CTASection/></div>

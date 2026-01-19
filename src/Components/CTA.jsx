@@ -9,10 +9,8 @@ const CTASection = () => {
 
   return (
     <>
-      {/* ============================================================
-          DESKTOP VERSION (YOUR ORIGINAL - 100% UNTOUCHED)
-          ============================================================ */}
-      <section className="hidden md:block bg-[#FAF7F2] py-24 px-6 text-center">
+    
+      <section className="hidden md:block  py-24 px-6 text-center">
         <h2 className="text-7xl font-extrabold tracking-wide mb-8 ">
           DESIGN <span className="text-[#FE8535] font-extrabold text-6xl text-center ">✦</span> CAPTURE <span className="text-[#FE8535] text-6xl text-center ">✦</span> CREATE
         </h2>
