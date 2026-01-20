@@ -60,10 +60,6 @@ const ProjectsSection = () => {
   const nextMobile = () => setMobileIndex((prev) => (prev + 1) % dummyProjects.length);
   const prevMobile = () => setMobileIndex((prev) => (prev - 1 + dummyProjects.length) % dummyProjects.length);
 
-  useEffect(() => {
-    document.body.style.overflow = selectedProject ? "hidden" : "unset";
-    return () => { document.body.style.overflow = "unset"; };
-  }, [selectedProject]);
 
   useEffect(() => {
     if (!selectedProject) return;
@@ -72,6 +68,15 @@ const ProjectsSection = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, [selectedProject]);
+useEffect(() => {
+  if (!selectedProject) return
+
+  const timer = setTimeout(() => {
+    setActiveImage((i) => (i + 1) % selectedProject.gallery.length)
+  }, 3000)
+
+  return () => clearTimeout(timer)
+}, [activeImage, selectedProject])
 
   return (
     <section className="py-16 md:py-28 bg-[#ffffff] overflow-hidden relative" id="portfolio">
@@ -207,53 +212,158 @@ const ProjectsSection = () => {
       </div>
 
       {/* PROJECT MODAL */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            drag="y"
-            dragConstraints={{ top: 0, bottom: 0 }}
-            onDragEnd={(_, info) => { if (info.offset.y > 100) setSelectedProject(null); }}
-            initial={{ y: "100%", opacity: 1 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "100%", opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-white flex flex-col"
+{/* PROJECT MODAL */}
+{/* PROJECT MODAL */}
+<AnimatePresence>
+  {selectedProject && (
+    <div className="fixed inset-0 z-[500] flex items-center justify-center">
+      {/* BACKDROP */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={() => setSelectedProject(null)}
+        className="absolute inset-0 bg-black/95 backdrop-blur-md"
+      />
+
+      {/* MODAL */}
+      <motion.div
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        exit={{ y: "100%" }}
+        transition={{ type: "spring", damping: 30, stiffness: 300 }}
+        className="
+          relative z-[501] w-full md:max-w-[980px]
+          bg-white shadow-[0_40px_120px_rgba(0,0,0,0.4)]
+          overflow-hidden rounded-t-[10px] md:rounded-[32px]
+          flex flex-col md:flex-row
+          h-[100dvh] md:h-[420px]
+        "
+      >
+        {/* IMAGE SECTION */}
+        <div className="relative w-full h-[60%] md:w-[60%] md:h-[420px] bg-neutral-900 overflow-hidden shrink-0">
+          
+          {/* FLOATING CLOSE BUTTON (Mobile Only) */}
+          <button
+            onClick={() => setSelectedProject(null)}
+            className="md:hidden absolute top-8 right-8 z-[60] w-12 h-12 rounded-full bg-black/20 backdrop-blur-xl border border-white/20 text-white flex items-center justify-center text-xl active:scale-90 transition-transform"
           >
-            <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white">
-                <div>
-                  <h4 className="text-black font-black uppercase text-lg">{selectedProject.title}</h4>
-                  <p className="text-[10px] tracking-widest uppercase opacity-40">Slide {activeImage + 1} of {selectedProject.gallery.length}</p>
-                </div>
-                <button onClick={() => setSelectedProject(null)} className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-sm">✕</button>
-            </div>
+            ✕
+          </button>
 
-            <div className="flex-1 relative flex items-center justify-center p-4 bg-[rgb(249,249,249)]">
-                <div className="absolute top-0 left-0 right-0 flex gap-1 px-6 pt-4 z-10">
-                   {selectedProject.gallery.map((_, i) => (
-                     <div key={i} className="flex-1 h-1 bg-gray-200 rounded-full overflow-hidden">
-                        {i === activeImage && <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 3 }} className="h-full bg-[#FE8535]" />}
-                        {i < activeImage && <div className="w-full h-full bg-[#FE8535]" />}
-                     </div>
-                   ))}
-                </div>
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeImage}
-                    src={selectedProject.gallery[activeImage]}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="max-h-[70vh] w-full object-contain rounded-xl"
+          {/* IMAGE STACK (Crossfade) */}
+          <div className="absolute inset-0 h-full w-full">
+            {selectedProject.gallery.map((img, i) => (
+              <motion.img
+                key={img}
+                src={img}
+                initial={false}
+                animate={{
+                  opacity: i === activeImage ? 1 : 0,
+                  scale: i === activeImage ? 1 : 1.1,
+                }}
+                transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ))}
+          </div>
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+          {/* PROGRESS BAR */}
+          <div className="absolute bottom-10 left-10 right-10 flex gap-2 z-50">
+            {selectedProject.gallery.map((_, i) => (
+              <div key={i} className="flex-1 h-[3px] bg-white/20 rounded-full overflow-hidden">
+                {i === activeImage && (
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 3, ease: "linear" }}
+                    className="h-full bg-[#FE8535] shadow-[0_0_10px_#FE8535]"
                   />
-                </AnimatePresence>
+                )}
+                {i < activeImage && <div className="w-full h-full bg-[#FE8535]" />}
+              </div>
+            ))}
+          </div>
+
+          {/* BOTTOM LABEL (Mobile only hint) */}
+          
+        </div>
+
+        {/* CONTENT SECTION */}
+        <div className="w-full md:w-[40%] flex flex-col p-8 md:p-12 bg-white justify-between">
+          
+          {/* DESCRIPTION: Only shows on Desktop */}
+          <div className="hidden md:block space-y-8">
+            <div className="flex justify-between items-start">
+              <div className="space-y-2">
+                <span className="text-[10px] font-black text-[#FE8535] tracking-[0.35em] uppercase block">
+                  {selectedProject.category}
+                </span>
+                <h3 className="text-black font-black uppercase text-[40px] tracking-tighter leading-[0.9]">
+                  {selectedProject.title}
+                </h3>
+              </div>
+
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="w-10 h-10 rounded-full bg-black/5 hover:bg-black text-black hover:text-white transition-all flex items-center justify-center"
+              >
+                ✕
+              </button>
             </div>
 
-            <div className="p-8 bg-white border-t border-gray-100 text-center">
-                <button className="w-full py-4 bg-black text-white rounded-full font-black uppercase tracking-widest text-[10px]">
-                  View Full Case Study
-                </button>
+            <p className="text-[15px] text-gray-400 font-medium leading-relaxed">
+              Experience the fusion of culinary identity and digital storytelling. 
+              Focusing on clarity, motion, and emotional engagement.
+            </p>
+          </div>
+
+          {/* INTERACTIVE GRAPHIC ZONE: Visible on BOTH Mobile and Desktop */}
+          <div className="mt-auto pt-6 md:pt-8 border-t border-neutral-100">
+            <div className="grid grid-cols-2 gap-y-6 md:gap-y-8">
+              
+              <div className="flex flex-col gap-1 md:gap-2">
+                <span className="text-[8px] md:text-[9px] font-medium text-neutral-400 uppercase tracking-[0.2em]">
+                  Reference
+                </span>
+                <span className="text-[10px] md:text-[11px] font-bold text-black uppercase tracking-wider">
+                  {selectedProject.title}_026
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-1 md:gap-2 text-right">
+                <span className="text-[8px] md:text-[9px] font-medium text-neutral-400 uppercase tracking-[0.2em]">
+                  Design System
+                </span>
+                <span className="text-[10px] md:text-[11px] font-bold text-black uppercase tracking-wider">
+                  Boutique / Custom
+                </span>
+              </div>
+
+              <div className="col-span-2 pt-4 flex justify-between items-end">
+                <div className="space-y-1">
+                  <div className="w-8 md:w-12 h-[1px] bg-black" />
+                  <p className="text-[7px] md:text-[8px] text-neutral-400 uppercase tracking-[0.3em] leading-none pt-2">
+                    Verified Premium Experience
+                  </p>
+                </div>
+
+                <div className="flex items-baseline gap-1">
+                  <span className="text-xs md:text-[14px] font-black text-black">01</span>
+                  <span className="text-[10px] text-neutral-300">/</span>
+                  <span className="text-[10px] text-neutral-300">04</span>
+                </div>
+              </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  )}
+</AnimatePresence>
+
     </section>
   );
 };
