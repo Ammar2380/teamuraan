@@ -152,30 +152,37 @@ useEffect(() => {
 
             {/* 2. DESKTOP ONLY SHOWCASE (Grid UI - Height Reduced to 400px) */}
             <div className="hidden md:block">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={page}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -30 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  className="grid md:grid-cols-2 gap-8"
-                >
-                  {visibleProjects.map((project) => (
-                    <motion.div
-                      key={project.id}
-                      onClick={() => { setSelectedProject(project); setActiveImage(0); }}
-                      whileTap={{ scale: 0.96 }}
-                      className="relative group h-[400px] rounded-[40px] overflow-hidden cursor-pointer shadow-sm"
-                    >
-                      <motion.img src={project.img} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-black/40 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex">
-                        <span className="text-white text-xs tracking-widest border border-white/40 px-6 py-2 rounded-full uppercase">View Case</span>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
+              {/* 2. DESKTOP ONLY SHOWCASE */}
+<div className="hidden md:block">
+  <AnimatePresence mode="popLayout" initial={false}>
+    <motion.div
+      key={page}
+      /* Changed from y: 30 to just opacity for a clean cross-fade */
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="grid md:grid-cols-2 gap-8"
+    >
+      {visibleProjects.map((project) => (
+        <motion.div
+          key={project.id}
+          onClick={() => { setSelectedProject(project); setActiveImage(0); }}
+          whileTap={{ scale: 0.96 }}
+          className="relative group h-[400px] rounded-[40px] overflow-hidden cursor-pointer shadow-sm"
+        >
+          <motion.img 
+            src={project.img} 
+            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+          />
+          <div className="absolute inset-0 bg-black/40 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex">
+            <span className="text-white text-xs tracking-widest border border-white/40 px-6 py-2 rounded-full uppercase">View Case</span>
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
+  </AnimatePresence>
+</div>
             </div>
           </div>
 
