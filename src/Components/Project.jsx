@@ -196,24 +196,23 @@ useEffect(() => {
                </div>
             </div>
 
-            <div className="text-[10px] md:flex gap-10 md:h-1 justify-center items-center md:text-sm text-[#888] tracking-tight mb-6 font-medium">
-              <p>Content Creation</p> <p>Digital Marketing</p> <p>Video - Photography</p>
+            <div className="text-[9px]    md:text-[15px] flex  md:h-1 justify-between md:justify-around md:px-15 items-center md:text-sm text-[#888]    tracking-tight mb-6 font-medium">
+              <p >Content Creation</p> <p >Digital Marketing</p> <p >Video - Photography</p>
             </div>
-            <div className="md:flex justify-center items-center">
-              <h3 className="text-xl md:text-2xl md:h-9 font-black text-[#111] leading-[1.2] mb-8 ">
+            <div className="md:flex justify-center  items-center">
+              <h3 className="text-lg md:text-2xl md:h-9 font-black text-[#111] leading-[1.2] mb-8 ">
                 The Stove Club, Naanstop, Chai Deewari, Jazzy Foods, Choolaah <br /> Yum Yum Hotpot, Misty Coffee Cafe, Shawarma Kaizer & More
               </h3>
-              <motion.img src={arrow} className="h-8 md:h-15 inline ml-4" />
+              <motion.img src={arrow} className="h-8 md:block hidden md:h-15  ml-4" />
             </div>
-            <p className="text-[#666] text-xs md:text-base leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[#666] text-xs md:block hidden md:text-base leading-relaxed max-w-2xl mx-auto">
               We start by getting to know our clients...
             </p>
         </div>
       </div>
 
       {/* PROJECT MODAL */}
-{/* PROJECT MODAL */}
-{/* PROJECT MODAL */}
+
 <AnimatePresence>
   {selectedProject && (
     <div className="fixed inset-0 z-[500] flex items-center justify-center">
