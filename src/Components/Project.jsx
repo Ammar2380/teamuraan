@@ -198,48 +198,84 @@ const ProjectsSection = () => {
             className="fixed inset-0 z-[200] bg-white flex flex-col"
           >
             {/* Modal Header */}
-            <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white">
-                <div>
-                  <h4 className="text-black font-black uppercase text-lg">{selectedProject.title}</h4>
-                  <p className="text-[10px] tracking-widest uppercase opacity-40">Slide {activeImage + 1} of {selectedProject.gallery.length}</p>
-                </div>
-                <button 
-                  onClick={() => setSelectedProject(null)} 
-                  className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-sm active:scale-90 transition-transform"
-                >✕</button>
-            </div>
+           <AnimatePresence>
+  {selectedProject && (
+    <motion.div
+      // Backdrop / Overlay
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
+      onClick={() => setSelectedProject(null)} // Close when clicking outside
+    >
+      <motion.div
+        // The Actual Modal Card
+        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+        initial={{ y: 50, opacity: 0, scale: 0.9 }}
+        animate={{ y: 0, opacity: 1, scale: 1 }}
+        exit={{ y: 50, opacity: 0, scale: 0.9 }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        className="bg-white w-full max-w-lg md:max-w-2xl overflow-hidden rounded-[32px] flex flex-col shadow-2xl"
+      >
+        {/* Modal Header - Compact */}
+        <div className="p-5 flex justify-between items-center border-b border-gray-100 bg-white">
+          <div>
+            <h4 className="text-black font-black uppercase text-base leading-tight">
+              {selectedProject.title}
+            </h4>
+            <p className="text-[9px] tracking-widest uppercase opacity-40">
+              Slide {activeImage + 1} of {selectedProject.gallery.length}
+            </p>
+          </div>
+          <button
+            onClick={() => setSelectedProject(null)}
+            className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs active:scale-90 transition-transform"
+          >
+            ✕
+          </button>
+        </div>
 
-            {/* Modal Gallery Content */}
-            <div className="flex-1 relative flex items-center justify-center p-4 bg-[rgb(249,249,249)] overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 flex gap-1 px-6 pt-4 z-10">
-                   {selectedProject.gallery.map((_, i) => (
-                     <div key={i} className="flex-1 h-1 bg-gray-200 rounded-full overflow-hidden">
-                        {i === activeImage && (
-                          <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 3 }} className="h-full bg-[#FE8535]" />
-                        )}
-                        {i < activeImage && <div className="w-full h-full bg-[#FE8535]" />}
-                     </div>
-                   ))}
-                </div>
-
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeImage}
-                    src={selectedProject.gallery[activeImage]}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="max-h-[70vh] w-full object-contain rounded-xl"
+        {/* Modal Gallery Content - Reduced Height */}
+        <div className="relative flex items-center justify-center p-4 bg-[#f9f9f9] h-[40vh] md:h-[50vh] overflow-hidden">
+          {/* Progress Bars */}
+          <div className="absolute top-0 left-0 right-0 flex gap-1 px-5 pt-3 z-10">
+            {selectedProject.gallery.map((_, i) => (
+              <div key={i} className="flex-1 h-1 bg-gray-200 rounded-full overflow-hidden">
+                {i === activeImage && (
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 3 }}
+                    className="h-full bg-[#FE8535]"
                   />
-                </AnimatePresence>
-            </div>
+                )}
+                {i < activeImage && <div className="w-full h-full bg-[#FE8535]" />}
+              </div>
+            ))}
+          </div>
 
-            {/* Bottom Button */}
-            <div className="p-8 bg-white border-t border-gray-100 text-center">
-                <button className="w-full py-4 bg-black text-white rounded-full font-black uppercase tracking-widest text-[10px]">
-                  View Full Case Study
-                </button>
-            </div>
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={activeImage}
+              src={selectedProject.gallery[activeImage]}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="h-full w-full object-contain rounded-xl"
+            />
+          </AnimatePresence>
+        </div>
+
+        {/* Bottom Button - Slimmer padding */}
+        <div className="p-6 bg-white border-t border-gray-100 text-center">
+          <button className="w-full py-4 bg-black text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-[#FE8535] transition-colors">
+            View Full Case Study
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
