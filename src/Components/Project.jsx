@@ -1,98 +1,89 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import arrow from "./Group 19.png";
-import coverimg1 from './Artboard 1/Artboard 1.jpg'
-import coverimg2 from './Artboard 1/Artboard 4.jpg'
-import coverimg3 from './Artboard 1/Artboard 5.jpg'
-import coverimg4 from './Artboard 1/Artboard 8.jpg'
-import coverimg5 from './Artboard 1/Artboard 9.jpg'
-import coverimg6 from './Artboard 1/Artboard 11.jpg'
-import coverimg7 from './Artboard 1/Artboard 13.jpg'
-import coverimg8 from './Artboard 1/Artboard 16.jpg'
+import yumyumcover1 from './Artboard 1/Artboard 1.jpg'
+import shawarmacover2 from './Artboard 1/Artboard 4.jpg'
+import stovevlubcover3 from './Artboard 1/Artboard 5.jpg'
+import mistycover4 from './Artboard 1/Artboard 8.jpg'
+import naanstopcover5 from './Artboard 1/Artboard 9.jpg'
+import chaideewarcover6 from './Artboard 1/Artboard 11.jpg'
+import chollahcover7 from './Artboard 1/Artboard 13.jpg'
+import jazzycover8 from './Artboard 1/Artboard 16.jpg'
 
+import stoveimg1 from './Mockups/stove club.jpg'
+import stoveimg2 from './Mockups/stove club (2).jpg'
+import naanstopimg1 from './Mockups/naanstop.jpg'
+import naanstopimg2 from './Mockups/naanstop (2).jpg'
+import mistycafeimg1 from './Mockups/Misty Cafe.jpg'
+import mistycafeimg2 from './Mockups/Misty Cafe2.jpg'
+import Shawarmaimg1 from './Mockups/Shawarma Kaizer.jpg'
+import Shawarmaimg2 from './Mockups/Shawarma Kaizer1.jpg'
+import yumimg1 from './Mockups/yum yum.jpg'
+import yumimg2 from './Mockups/yum yum (2).jpg'
+import jazzyfood1 from './Mockups/Jazzy Foods.jpg'
+import jazzyfood2 from './Mockups/Jazzy Foods2.jpg'
+import cholaah1 from './Mockups/Choolaah.jpg'
+import cholaah2 from './Mockups/Choolaah1.jpg'
+import chai1 from './Mockups/CHAI DEEWARI.jpg'
+import chai2 from './Mockups/CHAI DEEWARI1.jpg'
 const dummyProjects = [
   {
     id: 1,
-    title: "The Stove Club",
-    category: "Culinary Branding",
-    img: coverimg1,
-    gallery: [
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5",
-      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b",
-    ],
+    title: "Yum Yum",
+    category: "Food Branding",
+    img: yumyumcover1,
+    gallery: [yumimg1, yumimg2],
   },
   {
     id: 2,
-    title: "Naanstop",
-    category: "Digital Strategy",
-    img: coverimg2,
-    gallery: [
-      "https://images.unsplash.com/photo-1585937421612-70a008356fbe",
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
-    ],
+    title: "Shawarma Kaizer",
+    category: "Restaurant Identity",
+    img: shawarmacover2,
+    gallery: [Shawarmaimg1, Shawarmaimg2],
   },
   {
     id: 3,
-    title: "Chai Deewari",
-    category: "Content Creation",
-    img: coverimg3,
-    gallery: [
-      "https://images.unsplash.com/photo-1544787210-2213d2426687",
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de",
-    ],
+    title: "The Stove Club",
+    category: "Culinary Branding",
+    img: stovevlubcover3,
+    gallery: [stoveimg1, stoveimg2],
   },
   {
     id: 4,
-    title: "Jazzy Foods",
-    category: "Photography",
-    img: coverimg4,
-    gallery: [
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
-      "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327",
-    ],
+    title: "Misty Cafe",
+    category: "Cafe Branding",
+    img: mistycover4,
+    gallery: [mistycafeimg1, mistycafeimg2],
   },
   {
     id: 5,
-    title: "Urban Bites",
-    category: "Brand Identity",
-    img: coverimg5,
-    gallery: [
-      "https://images.unsplash.com/photo-1525755662778-989d0524087e",
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
-    ],
+    title: "Naanstop",
+    category: "Digital Strategy",
+    img: naanstopcover5,
+    gallery: [naanstopimg1, naanstopimg2],
   },
   {
     id: 6,
-    title: "Spice Route",
-    category: "Packaging Design",
-    img: coverimg6,
-    gallery: [
-      "https://images.unsplash.com/photo-1604908554168-3f87a6e7d9c4",
-      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-    ],
+    title: "Chai Deewari",
+    category: "Content Creation",
+    img: chaideewarcover6,
+    gallery: [chai1, chai2],
   },
   {
     id: 7,
-    title: "Cafe Noor",
-    category: "Social Media",
-    img: coverimg7,
-    gallery: [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
-      "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
-    ],
+    title: "Choolaah",
+    category: "Restaurant Branding",
+    img: chollahcover7,
+    gallery: [cholaah1, cholaah2],
   },
   {
     id: 8,
-    title: "Desi Delights",
-    category: "Creative Direction",
-    img: coverimg8,
-    gallery: [
-      "https://images.unsplash.com/photo-1499636136210-6f4ee915583e",
-      "https://images.unsplash.com/photo-1551218808-94e220e084d2",
-    ],
+    title: "Jazzy Foods",
+    category: "Photography",
+    img: jazzycover8,
+    gallery: [jazzyfood1, jazzyfood2],
   },
 ];
-
 
 const ProjectsSection = () => {
   const [page, setPage] = useState(0);
@@ -110,22 +101,15 @@ const ProjectsSection = () => {
   const prevMobile = () => setMobileIndex((prev) => (prev - 1 + dummyProjects.length) % dummyProjects.length);
 
 
-  useEffect(() => {
-    if (!selectedProject) return;
-    const interval = setInterval(() => {
-      setActiveImage((i) => (i === selectedProject.gallery.length - 1 ? 0 : i + 1));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [selectedProject]);
-useEffect(() => {
-  if (!selectedProject) return
+ useEffect(() => {
+  if (!selectedProject) return;
 
   const timer = setTimeout(() => {
-    setActiveImage((i) => (i + 1) % selectedProject.gallery.length)
-  }, 3000)
+    setActiveImage((i) => (i + 1) % selectedProject.gallery.length);
+  }, 3000);
 
-  return () => clearTimeout(timer)
-}, [activeImage, selectedProject])
+  return () => clearTimeout(timer);
+}, [activeImage, selectedProject]);
 
   return (
     <section className="py-16 md:py-28 bg-[#ffffff] overflow-hidden relative" id="portfolio">
