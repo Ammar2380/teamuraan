@@ -1,13 +1,21 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import arrow from "./Group 19.png";
+import coverimg1 from './Artboard 1/Artboard 1.jpg'
+import coverimg2 from './Artboard 1/Artboard 4.jpg'
+import coverimg3 from './Artboard 1/Artboard 5.jpg'
+import coverimg4 from './Artboard 1/Artboard 8.jpg'
+import coverimg5 from './Artboard 1/Artboard 9.jpg'
+import coverimg6 from './Artboard 1/Artboard 11.jpg'
+import coverimg7 from './Artboard 1/Artboard 13.jpg'
+import coverimg8 from './Artboard 1/Artboard 16.jpg'
 
 const dummyProjects = [
   {
     id: 1,
     title: "The Stove Club",
     category: "Culinary Branding",
-    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop",
+    img: coverimg1,
     gallery: [
       "https://images.unsplash.com/photo-1555396273-367ea4eb4db5",
       "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b",
@@ -17,7 +25,7 @@ const dummyProjects = [
     id: 2,
     title: "Naanstop",
     category: "Digital Strategy",
-    img: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?q=80&w=1000&auto=format&fit=crop",
+    img: coverimg2,
     gallery: [
       "https://images.unsplash.com/photo-1585937421612-70a008356fbe",
       "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
@@ -27,7 +35,7 @@ const dummyProjects = [
     id: 3,
     title: "Chai Deewari",
     category: "Content Creation",
-    img: "https://images.unsplash.com/photo-1544787210-2213d2426687?q=80&w=1000&auto=format&fit=crop",
+    img: coverimg3,
     gallery: [
       "https://images.unsplash.com/photo-1544787210-2213d2426687",
       "https://images.unsplash.com/photo-1559339352-11d035aa65de",
@@ -37,13 +45,54 @@ const dummyProjects = [
     id: 4,
     title: "Jazzy Foods",
     category: "Photography",
-    img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop",
+    img: coverimg4,
     gallery: [
       "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
       "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327",
     ],
   },
+  {
+    id: 5,
+    title: "Urban Bites",
+    category: "Brand Identity",
+    img: coverimg5,
+    gallery: [
+      "https://images.unsplash.com/photo-1525755662778-989d0524087e",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    ],
+  },
+  {
+    id: 6,
+    title: "Spice Route",
+    category: "Packaging Design",
+    img: coverimg6,
+    gallery: [
+      "https://images.unsplash.com/photo-1604908554168-3f87a6e7d9c4",
+      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+    ],
+  },
+  {
+    id: 7,
+    title: "Cafe Noor",
+    category: "Social Media",
+    img: coverimg7,
+    gallery: [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+      "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+    ],
+  },
+  {
+    id: 8,
+    title: "Desi Delights",
+    category: "Creative Direction",
+    img: coverimg8,
+    gallery: [
+      "https://images.unsplash.com/photo-1499636136210-6f4ee915583e",
+      "https://images.unsplash.com/photo-1551218808-94e220e084d2",
+    ],
+  },
 ];
+
 
 const ProjectsSection = () => {
   const [page, setPage] = useState(0);
@@ -102,7 +151,7 @@ useEffect(() => {
         <div className="flex flex-col md:flex-row items-center gap-10">
           
           {/* Desktop Left Arrow */}
-          <button onClick={prevProject} className="hidden md:flex w-16 h-16 rounded-full border border-black/10 items-center justify-center hover:bg-black hover:text-white transition-all">←</button>
+          <button onClick={prevProject} className="hidden md:flex w-10 h-10 rounded-full border border-black/10 items-center justify-center hover:bg-black hover:text-white transition-all">←</button>
 
           <div className="w-full">
             
@@ -187,7 +236,7 @@ useEffect(() => {
           </div>
 
           {/* Desktop Right Arrow */}
-          <button onClick={nextProject} className="hidden md:flex w-16 h-16 rounded-full border border-black/10 items-center justify-center hover:bg-black hover:text-white transition-all">→</button>
+          <button onClick={nextProject} className="hidden md:flex w-10 h-10 rounded-full border border-black/10 items-center justify-center hover:bg-black hover:text-white transition-all">→</button>
         </div>
 
         {/* FOOTER CONTENT */}
