@@ -43,12 +43,10 @@ const CTASection = () => {
         </p>
 
         <div className="flex justify-center items-center gap-4">
-          <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="bg-[#222222] text-white px-10 cursor-pointer py-3 rounded-full hover:bg-[#FE8535] transition-all duration-300 flex items-center gap-2 font-semibold">
+          <a href={`https://wa.me/${+923311380533}`} target="_blank" rel="noopener noreferrer" className="bg-[#222222] text-white px-10 cursor-pointer py-3 rounded-full hover:bg-[#FE8535] transition-all duration-300 flex items-center gap-2 font-semibold">
             <FaWhatsapp className="text-xl" /> Hire Us Now
           </a>
-          <a href={calendlyLink} target="_blank" rel="noopener noreferrer" className="border border-black cursor-pointer px-8 py-3 rounded-full hover:bg-black hover:text-white transition-all duration-300 flex items-center gap-2 font-semibold">
-            <FiCalendar className="text-xl" /> Book a Free Discovery Call
-          </a>
+       
         </div>
       </section>
 
@@ -121,14 +119,7 @@ const CTASection = () => {
               <span className="font-bold uppercase tracking-widest text-sm">Hire Us Now</span>
             </motion.a>
 
-            <motion.a 
-              whileTap={{ scale: 0.95 }}
-              href={calendlyLink}
-              className="bg-transparent border-2 border-black py-5 rounded-2xl flex items-center justify-center gap-4 transition-colors active:bg-black active:text-white"
-            >
-              <FiCalendar className="text-2xl" />
-              <span className="font-bold uppercase tracking-widest text-sm">Free Discovery Call</span>
-            </motion.a>
+        
           </div>
         </div>
       </section>

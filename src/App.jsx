@@ -52,7 +52,10 @@ const App = () => {
     <div data-aos="fade-up " ><Services/></div>
   </div>
   <div data-aos="fade-up" className='z-50'><Design/></div>
-  <div data-aos="fade-up"><ProjectsSection/></div>
+
+<div data-aos="fade-up" id="project-section">
+  <ProjectsSection />
+</div>
   <div data-aos="fade-up"><Testimonials/></div>
   <div data-aos="fade-up"><CTASection/></div>
   <div data-aos="fade-up"><ContactSection/></div>

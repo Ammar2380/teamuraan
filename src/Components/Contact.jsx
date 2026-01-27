@@ -163,13 +163,13 @@ const ContactSection = () => {
             
             <div className="space-y-4 md:space-y-6">
               <p className="text-gray-500 uppercase text-[10px] md:text-xs tracking-[0.3em] font-bold">Inquiries</p>
-              <a 
-                href="tel:+1234567890" 
+             <button
+             
                 className="text-2xl md:text-3xl font-bold hover:text-[#FE8535] transition-all flex items-center gap-4 group"
               >
-                +1 (234) 567-890 
+             +92 331 1380533
                 <FiArrowUpRight className="text-[#FE8535] group-active:translate-x-2 group-active:-translate-y-2 transition-transform" />
-              </a>
+             </button>
             </div>
           </motion.div>
 

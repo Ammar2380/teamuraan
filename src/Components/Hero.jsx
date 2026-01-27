@@ -22,7 +22,12 @@ const Hero = () => {
 
   const headline = "Team Uraan".split('');
   const images = [img1, img2, img3, img4];
-
+const scrollToProject = () => {
+    const element = document.getElementById('project-section'); // Make sure your target component has this ID
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }; 
   return (
     <section
       id="home"
@@ -102,13 +107,14 @@ const Hero = () => {
             Elevating Brands. <span className="font-bold">Amplifying Success.</span>
           </h3>
 
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(254, 133, 53, 0.4)' }}
-            whileTap={{ scale: 0.95 }}
-            className="m-0 bg-[#FAF6EC] text-[#FE8535] md:px-10  md:py-3   py-3 mt-4 md:w-full w-40 max-w-[260px] rounded-full font-black uppercase text-xs tracking-widest shadow-[0_20px_40px_rgba(0,0,0,0.2)] transition-all"
-            >
-            Start Project
-          </motion.button>
+         <motion.button
+      onClick={scrollToProject} // 2. Attach the click handler
+      whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(254, 133, 53, 0.4)' }}
+      whileTap={{ scale: 0.95 }}
+      className="m-0 bg-[#FAF6EC] text-[#FE8535] md:px-10 md:py-3 py-3 mt-4 md:w-full w-40 max-w-[260px] rounded-full font-black uppercase text-xs tracking-widest shadow-[0_20px_40px_rgba(0,0,0,0.2)] transition-all"
+    >
+      Start Project
+    </motion.button>
         </div>
 
         {/* --- DESKTOP DECK: Back to your original logic --- */}

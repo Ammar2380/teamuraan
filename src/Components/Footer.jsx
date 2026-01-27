@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { FaInstagram, FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import logo from './logo2.png';
 
 const Footer = () => {
@@ -9,17 +10,43 @@ const Footer = () => {
   const xMove = useTransform(scrollYProgress, [0.8, 1], [-20, -150]);
   const opacityFade = useTransform(scrollYProgress, [0.9, 1], [0.1, 0.4]);
 
-  const socialLinks = [
-    { name: "Instagram", handle: "@teamuraan", url: "#" },
-    { name: "LinkedIn", handle: "team-uraan", url: "#" },
-    { name: "Twitter", handle: "@teamuraan", url: "#" },
+  // Unified data structure to fix the "socialLinks is not defined" error
+  const socialIcons = [
+    {
+      name: "Instagram",
+      handle: "@teamuraan.marketing",
+      icon: <FaInstagram />,
+      url: "https://www.instagram.com/teamuraan.marketing",
+      label: "Instagram",
+    },
+    {
+      name: "Facebook",
+      handle: "Team Uraan",
+      icon: <FaFacebookF />,
+      url: "https://www.facebook.com/profile.php?id=61566306183826",
+      label: "Facebook",
+    },
+    {
+      name: "LinkedIn",
+      handle: "team-uraan",
+      icon: <FaLinkedinIn />,
+      url: "https://www.linkedin.com/company/team-uraanproductioncompany/",
+      label: "LinkedIn",
+    },
+    {
+      name: "Twitter",
+      handle: "@teamuraan",
+      icon: <FaTwitter />,
+      url: "https://x.com/teamuraan",
+      label: "Twitter",
+    },
   ];
 
   return (
     <footer className="bg-[#0D0D0D] text-white pt-20 pb-6 px-6 relative overflow-hidden">
       
       {/* ============================================================
-          DESKTOP VERSION (YOUR ORIGINAL - 100% UNTOUCHED)
+          DESKTOP VERSION
           ============================================================ */}
       <div className="hidden md:block max-w-7xl mx-auto">
         <div className="flex flex-col items-center mb-14">
@@ -35,9 +62,21 @@ const Footer = () => {
         </div>
 
         <div className="flex justify-center gap-6 mb-12">
-          {["instagram", "facebook", "linkedin", "twitter"].map((social, i) => (
-            <a key={i} href={`#${social}`} className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#FE8535] hover:border-[#FE8535] hover:scale-110 transition-all duration-300 group">
-              <span className="text-[10px] uppercase font-bold group-hover:text-black">{social.substring(0, 2)}</span>
+          {socialIcons.map((item, i) => (
+            <a
+              key={i}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={item.label}
+              className="w-11 h-11 rounded-full border border-white/10 
+                         flex items-center justify-center 
+                         text-white text-lg
+                         hover:bg-[#FE8535] hover:border-[#FE8535] 
+                         hover:text-black hover:scale-110 
+                         transition-all duration-300"
+            >
+              {item.icon}
             </a>
           ))}
         </div>
@@ -53,7 +92,7 @@ const Footer = () => {
       </div>
 
       {/* ============================================================
-          MOBILE/TABLET VERSION (THE "ULTIMATE" MASTERPIECE)
+          MOBILE/TABLET VERSION
           ============================================================ */}
       <div className="block md:hidden">
         {/* Massive Parallax Background Label */}
@@ -80,12 +119,14 @@ const Footer = () => {
             </h2>
           </div>
 
-          {/* Middle: Kinetic Social List */}
+          {/* Middle: Kinetic Social List - Fixed to use socialIcons */}
           <div className="flex-grow flex flex-col justify-center gap-1">
-            {socialLinks.map((item, i) => (
+            {socialIcons.map((item, i) => (
               <motion.a
                 key={i}
                 href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileTap={{ scale: 0.98, x: 10 }}
                 className="flex items-end justify-between py-8 border-b border-white/5 group"
               >
