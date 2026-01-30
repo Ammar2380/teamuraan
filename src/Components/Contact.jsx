@@ -170,6 +170,13 @@ const ContactSection = () => {
              +92 331 1380533
                 <FiArrowUpRight className="text-[#FE8535] group-active:translate-x-2 group-active:-translate-y-2 transition-transform" />
              </button>
+             <button
+             
+                className="text-2xl md:text-3xl font-bold hover:text-[#FE8535] transition-all flex items-center gap-4 group"
+              >
+            +92 332 1763674
+                <FiArrowUpRight className="text-[#FE8535] group-active:translate-x-2 group-active:-translate-y-2 transition-transform" />
+             </button>
             </div>
           </motion.div>
 
