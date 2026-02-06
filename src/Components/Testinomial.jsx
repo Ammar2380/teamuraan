@@ -18,7 +18,7 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden" id="testimonials">
      
       <section 
         className="hidden md:block bg-[#141414] text-white py-32 px-6 relative z-10" id='testimonials' 
