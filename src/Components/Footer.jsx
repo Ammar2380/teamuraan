@@ -14,9 +14,9 @@ const Footer = () => {
   const socialIcons = [
     {
       name: "Instagram",
-      handle: "@teamuraan.marketing",
+      handle: "Team Uraan",
       icon: <FaInstagram />,
-      url: "https://www.instagram.com/teamuraan.marketing",
+      url: "https://www.instagram.com/teamuraan.marketing?igsh=a2RpMGY1OTVtdnFh",
       label: "Instagram",
     },
     {
